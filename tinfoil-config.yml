@@ -14,15 +14,9 @@ containers:
     runtime: nvidia
     gpus: all
     ipc: host
+    entrypoint: ["/bin/sh", "-c"]
     command: [
-      "--model", "/tinfoil/mpk/mpk-6d350aa3684da02b2f59157fc11b7c5ea487fa265e98ca1c1dd74cf31ac2fa7e",
-      "--stage-configs-path", "vllm_omni/model_executor/stage_configs/qwen3_tts.yaml",
-      "--port", "8001",
-      "--host", "0.0.0.0",
-      "--gpu-memory-utilization", "0.9",
-      "--trust-remote-code",
-      "--enforce-eager",
-      "--omni",
+      "ln -s /tinfoil/mpk/mpk-6d350aa3684da02b2f59157fc11b7c5ea487fa265e98ca1c1dd74cf31ac2fa7e /tmp/model-CustomVoice && exec vllm serve /tmp/model-CustomVoice --stage-configs-path vllm_omni/model_executor/stage_configs/qwen3_tts.yaml --port 8001 --host 0.0.0.0 --gpu-memory-utilization 0.9 --trust-remote-code --enforce-eager --omni"
     ]
 
 shim:
