@@ -1,0 +1,35 @@
+shim-version: v0.3.16@sha256:20220be4487f241e7e2a9af6dd576d20ba35d71307bd777c8dba9ba5da03fb38
+cvm-version: 0.6.7
+cpus: 8
+memory: 16384
+
+models:
+  - name: "Qwen3-TTS-12Hz-1.7B-CustomVoice"
+    repo: "Qwen/Qwen3-TTS-12Hz-1.7B-CustomVoice@0c0e3051f131929182e2c023b9537f8b1c68adfe"
+    mpk: "6d350aa3684da02b2f59157fc11b7c5ea487fa265e98ca1c1dd74cf31ac2fa7e_4520226816_7dc41474-aac5-50bd-bcd5-ffff26ccad57"
+  
+containers:
+  - name: "qwen3-tts-12hz-1.7b-customvoice"
+    image: "vllm/vllm-omni:v0.14.0@sha256:297971b3ae2be4168b18c7ae375842f28c17a654c7f6c8ff9f2402352b7add08"
+    runtime: nvidia
+    gpus: all
+    ipc: host
+    command: [
+      "/tinfoil/mpk/mpk-6d350aa3684da02b2f59157fc11b7c5ea487fa265e98ca1c1dd74cf31ac2fa7e",
+      "--stage-configs-path", "vllm_omni/model_executor/stage_configs/qwen3_tts.yaml",
+      "--port", "8001",
+      "--host", "0.0.0.0",
+      "--gpu-memory-utilization", "0.9",
+      "--trust-remote-code",
+      "--enforce-eager",
+      "--omni",
+    ]
+
+shim:
+  listen-port: 443
+  upstream-port: 8001
+  authenticated: true
+  paths:
+    - /v1/audio/speech
+    - /metrics
+    - /health
