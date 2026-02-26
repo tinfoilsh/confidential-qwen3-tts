@@ -4,19 +4,19 @@ cpus: 16
 memory: 65536
 
 models:
-  - name: "Qwen3-TTS-12Hz-1.7B-CustomVoice"
+  - name: "qwen3-tts-1.7b"
     repo: "Qwen/Qwen3-TTS-12Hz-1.7B-CustomVoice@0c0e3051f131929182e2c023b9537f8b1c68adfe"
     mpk: "6d350aa3684da02b2f59157fc11b7c5ea487fa265e98ca1c1dd74cf31ac2fa7e_4520226816_7dc41474-aac5-50bd-bcd5-ffff26ccad57"
   
 containers:
-  - name: "qwen3-tts-12hz-1.7b-customvoice"
+  - name: "qwen3-tts-1.7b"
     image: "vllm/vllm-omni:v0.14.0@sha256:297971b3ae2be4168b18c7ae375842f28c17a654c7f6c8ff9f2402352b7add08"
     runtime: nvidia
     gpus: all
     ipc: host
     entrypoint: ["/bin/sh", "-c"]
     command: [
-      "ln -s /tinfoil/mpk/mpk-6d350aa3684da02b2f59157fc11b7c5ea487fa265e98ca1c1dd74cf31ac2fa7e /tmp/model-CustomVoice && exec vllm serve /tmp/model-CustomVoice --stage-configs-path vllm_omni/model_executor/stage_configs/qwen3_tts.yaml --port 8001 --host 0.0.0.0 --gpu-memory-utilization 0.9 --trust-remote-code --enforce-eager --omni"
+      "ln -s /tinfoil/mpk/mpk-6d350aa3684da02b2f59157fc11b7c5ea487fa265e98ca1c1dd74cf31ac2fa7e /tmp/model-CustomVoice && exec vllm serve /tmp/model-CustomVoice --stage-configs-path vllm_omni/model_executor/stage_configs/qwen3_tts.yaml --port 8001 --host 0.0.0.0 --gpu-memory-utilization 0.9 --trust-remote-code --enforce-eager --omni --served-model-name qwen3-tts-1.7b"
     ]
 
 shim:
