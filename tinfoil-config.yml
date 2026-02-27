@@ -1,4 +1,4 @@
-shim-version: v0.4.0@sha256:86e5fe4bcbf673847322c7416d49580ba6e8b41e30166fe9b8a8512b4a90c7ee
+shim-version: v0.4.2@sha256:d65f769e37bbe86ffaeef42120c29c4b9de33415fcd7588a9ef7a64f609aa2a3
 cvm-version: 0.6.7
 cpus: 16
 memory: 65536
@@ -23,6 +23,8 @@ shim:
   listen-port: 443
   upstream-port: 8001
   authenticated: true
+  authenticated-endpoints:
+    - /v1/audio/speech
   paths:
     - /v1/audio/speech
     - /metrics
