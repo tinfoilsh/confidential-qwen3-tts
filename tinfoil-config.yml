@@ -15,6 +15,8 @@ containers:
     gpus: all
     ipc: host
     entrypoint: ["/bin/sh", "-c"]
+    env:
+      - LD_LIBRARY_PATH: "/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH"
     command: [
       "ln -s /tinfoil/mpk/mpk-6d350aa3684da02b2f59157fc11b7c5ea487fa265e98ca1c1dd74cf31ac2fa7e /tmp/model-CustomVoice && exec vllm serve /tmp/model-CustomVoice --stage-configs-path vllm_omni/model_executor/stage_configs/qwen3_tts.yaml --port 8001 --host 0.0.0.0 --trust-remote-code --enforce-eager --omni --served-model-name qwen3-tts"
     ]
