@@ -10,7 +10,7 @@ models:
   
 containers:
   - name: "qwen3-tts"
-    image: "vllm/vllm-omni:v0.14.0@sha256:297971b3ae2be4168b18c7ae375842f28c17a654c7f6c8ff9f2402352b7add08"
+    image: "vllm/vllm-omni:v0.16.0@sha256:33b1ed6505f67fa080297002b9df02dc2b6ad6b745787f3d04981f007f82f491"
     runtime: nvidia
     gpus: all
     ipc: host
